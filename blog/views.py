@@ -1,34 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import Blog 
+
+
 
 def home(request):
-    return render(request, 'home.html')
+    # Fetch all blog posts from the database
+    blogs = Blog.objects.all()
+    
+    # Pass the blogs to the template context
+    return render(request, 'home.html', {'blogs': blogs})
 
-def blog_post(request):
-    # Dummy data for demonstration
-    post = {
-        'title': 'How the IT Sector is Growing',
-        'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...'
-    }
-    return render(request, 'blog_post.html', {'post': post})
+def clear(req):
+    Blog.objects.all().delete()
+    return redirect("/")
 
-def login(request):
-    return render(request, 'login.html')
-
-def signup(request):
-    return render(request, 'signup.html')
-
-from django.shortcuts import render
-from .models import Blog
 
 def create_blog(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         data = request.POST.get('data')
-        author = request.user  # Assuming the user is authenticated
-        # Handle success or redirect to another page
-        return HttpResponse("Thanks")
+        
+        # Create a new Blog object and save it
+        new_blog = Blog(title=title, data=data)
+        new_blog.save()
+        
+        # Optionally, you can redirect to a success page or another view
+        return redirect("/")
+        # return HttpResponse("Blog post created successfully!")
     else:
-        # Handle GET request to render form
+        # Handle GET request to render the form
         return render(request, 'blog_form.html')
-
