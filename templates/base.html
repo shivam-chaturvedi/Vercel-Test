@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}My Django Blog{% endblock %}</title>
+<style>
+  /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+</style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <a class="navbar-brand" href="#">My Blog</a>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Signup</a></li>
+          <li><a href="/post">Post a Blog</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 My Django Blog. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // scripts.js - Example JavaScript file
+console.log('Hello from scripts.js!');
+
+  </script>
+</body>
+</html>
